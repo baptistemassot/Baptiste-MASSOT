@@ -19,18 +19,18 @@
   --accent2: #d9d9d6;
   --accent3: #bdbdba;
   --lime: #e8e8e5;
-  --glass: rgba(255, 255, 255, .06);
+  --glass: rgba(18, 18, 18, .5);
   --glass-line: rgba(255, 255, 255, .16);
   --header: rgba(8, 8, 8, .78);
   --wash-blue: radial-gradient(120% 70% at 0% 0%, rgba(255, 255, 255, .06), transparent 60%);
   --wash-warm: radial-gradient(100% 70% at 100% 0%, rgba(255, 255, 255, .05), transparent 60%);
   --wash-sun: radial-gradient(110% 70% at 0% 0%, rgba(255, 255, 255, .06), transparent 60%);
   --hero-grad: rgba(0, 0, 0, .86);
-  --band-grad: rgba(0, 0, 0, .86);
-  --band2-grad: rgba(0, 0, 0, .90);
+  --band-grad: rgba(0, 0, 0, .5);
+  --band2-grad: rgba(0, 0, 0, .55);
   --cta: #f4f4f2;
   --cta-glow: rgba(255, 255, 255, .25);
-  --veil: rgba(8, 8, 8, .86);
+  --veil: rgba(8, 8, 8, .55);
   --on-accent: #080808;
   --shadow: 0 26px 50px -26px rgba(0, 0, 0, .8);
   --display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
@@ -99,6 +99,7 @@ h1 { font-family: var(--display); font-weight: 800; text-transform: uppercase; f
 
 /* Sections et bandeaux */
 section { padding-block: 96px; }
+main > section { background-color: rgba(0, 0, 0, .3); -webkit-backdrop-filter: blur(1.5px); backdrop-filter: blur(1.5px); }
 .band-blue { background: var(--wash-blue); }
 .band-sun { background: var(--wash-sun); }
 .band-warm { background: var(--wash-warm); }
@@ -141,7 +142,7 @@ h2 { font-family: var(--display); font-weight: 800; text-transform: uppercase; f
 .story .aside .photo img { position: absolute; inset: 0; width: 100%; height: 100%; }
 .story .story-text p { font-size: 1.3rem; }
 .story .aside { display: block; position: relative; top: auto; }
-.story .aside .facts { position: absolute; left: 14px; right: 14px; bottom: 14px; margin: 0; padding: 4px 18px; border: 1px solid var(--glass-line); border-radius: 12px; background: rgba(8,8,8,.62); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.story .aside .facts { position: absolute; left: 14px; right: 14px; bottom: 14px; margin: 0; padding: 4px 18px; border: 1px solid var(--glass-line); border-radius: 12px; background: rgba(8,8,8,.72); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
 .story .aside .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 0 18px; padding: 8px 14px; left: 10px; right: 10px; bottom: 10px; }
 .story .aside .facts div { flex-direction: column; gap: 2px; padding: 8px 0; border-bottom: 0; }
 .story .aside .facts dt { font-size: .66rem; }
@@ -252,7 +253,7 @@ h2 { font-family: var(--display); font-weight: 800; text-transform: uppercase; f
 .social { position: relative; display: flex; flex-direction: column; gap: 10px; min-height: 180px; padding: 24px 22px 22px; text-decoration: none; color: var(--fg); background: var(--glass); border: 1px solid var(--glass-line); border-radius: 14px; -webkit-backdrop-filter: blur(16px) saturate(1.3); backdrop-filter: blur(16px) saturate(1.3); overflow: hidden; transition: transform .25s, background .25s; }
 .social::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 5px; background: var(--brand); }
 .social:hover { transform: translateY(-2px); background: var(--glass-line); }
-.social.insta { --brand: #e1306c; } .social.strava { --brand: #fc4c02; } .social.yt { --brand: #ff0033; }
+.social.insta, .social.strava, .social.yt { --brand: #ffffff; }
 .social .sn { font-family: var(--display); font-weight: 800; text-transform: uppercase; font-size: 2.2rem; line-height: 1; }
 .social .sd { color: var(--muted); font-size: .98rem; line-height: 1.4; }
 .social .sh { margin-top: auto; display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: .8rem; letter-spacing: .06em; }
@@ -303,6 +304,24 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; font-famil
   .gallery .photo { margin-bottom: 12px; }
   .hl { padding: 16px; }
 }
+
+main { text-shadow: 0 1px 16px rgba(0,0,0,.6), 0 0 2px rgba(0,0,0,.35); }
+.btn, .tab { text-shadow: none; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+/* Zoom et fondu au défilement */
+.zoomy main > section { will-change: opacity; }
+.zoomy main > section > .wrap { transform-origin: 50% 45%; will-change: transform; }
+.zoomy .bgimg { transform-origin: 50% 50%; will-change: transform; }
+.zoomy .rv { opacity: 0; transform: translate3d(0, 70px, 0) scale(.86); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0ms); }
+.zoomy .rv.in { opacity: 1; transform: none; }
+.zoomy h2.rv { transform: translate3d(-80px, 0, 0) scale(.9); }
+.zoomy .res.rv, .zoomy .bio-list li.rv { transform: translate3d(-50px, 0, 0); }
+.zoomy .hl.rv, .zoomy .step.rv, .zoomy .social.rv { transform: translate3d(0, 90px, 0) scale(.8); }
+.zoomy .rv.in.in.in { opacity: 1; transform: none; }
+.zoomy .hl.rv.in.in.in:hover, .zoomy .social.rv.in.in.in:hover { transform: translateY(-6px) scale(1.02); }
+.zoomy .rv.in { transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1), background .3s, border-color .3s; }
+@media (prefers-reduced-motion: reduce) { .zoomy .rv, .zoomy .bgimg { opacity: 1 !important; transform: none !important; transition: none !important; } }
+@media (prefers-reduced-motion: reduce) { .zoomy main > section, .zoomy main > section > .wrap { opacity: 1 !important; transform: none !important; } }
 </style>
 </head>
 <body>
@@ -407,10 +426,11 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; font-famil
       <div class="podcast">
         <div>
           <h3>Borne Podcast</h3>
-          <p>Je reviens sur mon parcours de triathlète de haut niveau, jusqu'à la sélection en équipe de France.</p>
+          <p>Baptiste Massot : retrouver le haut niveau après un burn-out sportif</p>
         </div>
         <a class="btn" href="https://www.youtube.com/watch?v=qNsI1tFEGRk" target="_blank" rel="noopener">Écouter l'épisode</a>
       </div>
+      <div class="socials"><a class="social insta" href="https://www.instagram.com/baptiste.massot/" target="_blank" rel="noopener"><span class="sn">Instagram</span><span class="sd">Photos, coulisses et vie de course</span><span class="sh">@baptiste.massot<i aria-hidden="true">↗</i></span></a><a class="social strava" href="https://www.strava.com/athletes/22947683" target="_blank" rel="noopener"><span class="sn">Strava</span><span class="sd">Mes sorties et mes entraînements</span><span class="sh">Baptiste Massot<i aria-hidden="true">↗</i></span></a><a class="social yt" href="https://www.youtube.com/@baptiste.massot" target="_blank" rel="noopener"><span class="sn">YouTube</span><span class="sd">Vidéos et podcast</span><span class="sh">@baptiste.massot<i aria-hidden="true">↗</i></span></a></div>
     </div>
   </section>
 
@@ -444,7 +464,7 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; font-famil
           <div class="actions">
             <button class="btn" id="copy" type="button">Copier l'adresse</button>
           </div>
-          <div class="socials"><a class="social insta" href="https://www.instagram.com/baptiste.massot/" target="_blank" rel="noopener"><span class="sn">Instagram</span><span class="sd">Photos, coulisses et vie de course</span><span class="sh">@baptiste.massot<i aria-hidden="true">↗</i></span></a><a class="social strava" href="https://www.strava.com/athletes/22947683" target="_blank" rel="noopener"><span class="sn">Strava</span><span class="sd">Mes sorties et mes entraînements</span><span class="sh">Baptiste Massot<i aria-hidden="true">↗</i></span></a><a class="social yt" href="https://www.youtube.com/@baptiste.massot" target="_blank" rel="noopener"><span class="sn">YouTube</span><span class="sd">Vidéos et podcast</span><span class="sh">@baptiste.massot<i aria-hidden="true">↗</i></span></a></div>
+          
         </div>
       </div>
     </div>
@@ -483,6 +503,60 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; font-famil
   });
 })();
 </script>
+<script>
+(function(){
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var secs = [].slice.call(document.querySelectorAll('main > section'));
+  if (!secs.length) return;
+  var root = document.documentElement, bg = document.querySelector('.bgimg');
+  root.classList.add('zoomy');
+  /* Révélation en cascade des éléments */
+  var sel = 'h2, .label, .highlights .hl, .bhead, .tabs, .res, .bio-list li, .story-text > p, .story .aside, .tri-intro, .duo, .step, .team-logo, .social, .offer > *, .contact-mail, .btn';
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function(es){
+    es.forEach(function(e){ e.target.classList.toggle('in', e.isIntersecting); });
+  }, {threshold: 0.12, rootMargin: '0px 0px -6% 0px'}) : null;
+  secs.forEach(function(sec){
+    var n = 0;
+    [].slice.call(sec.querySelectorAll(sel)).forEach(function(el){
+      if (el.closest('.panel[hidden]')) return;
+      el.classList.add('rv');
+      el.style.setProperty('--d', Math.min(n++ % 6, 5) * 90 + 'ms');
+      if (io) io.observe(el); else el.classList.add('in');
+    });
+  });
+  var running = false;
+  var cur = secs.map(function(){ return {o: 0, s: 0.8}; });
+  var bgCur = 0, bgTarget = 0;
+  function c(v){ return v < 0 ? 0 : v > 1 ? 1 : v; }
+  function ease(x){ return x * x * (3 - 2 * x); }
+  function frame(){
+    var vh = window.innerHeight || 800, k = 0.14, moving = false;
+    var maxY = Math.max(1, document.documentElement.scrollHeight - vh);
+    bgTarget = c((window.pageYOffset || 0) / maxY);
+    bgCur += (bgTarget - bgCur) * 0.08;
+    if (Math.abs(bgTarget - bgCur) > 0.0004) moving = true;
+    if (bg) bg.style.transform = 'scale(' + (1.04 + 0.4 * bgCur).toFixed(4) + ') translate3d(0,' + (-bgCur * 5).toFixed(2) + '%,0)';
+    secs.forEach(function(sec, i){
+      var r = sec.getBoundingClientRect(), w = sec.firstElementChild;
+      var e = ease(c((vh - r.top) / (vh * 0.6)));
+      var l = ease(c(r.bottom / (vh * 0.6)));
+      var tO = Math.min(e, l), tS = (0.8 + 0.2 * e) * (1 + 0.1 * (1 - l));
+      var st = cur[i];
+      st.o += (tO - st.o) * k; st.s += (tS - st.s) * k;
+      if (Math.abs(tO - st.o) > 0.002 || Math.abs(tS - st.s) > 0.0008) moving = true;
+      sec.style.opacity = st.o.toFixed(3);
+      if (w) w.style.transform = 'scale(' + st.s.toFixed(4) + ')';
+    });
+    if (moving) requestAnimationFrame(frame); else running = false;
+  }
+  function req(){ if (!running) { running = true; requestAnimationFrame(frame); } }
+  window.addEventListener('scroll', req, {passive:true});
+  window.addEventListener('resize', req);
+  frame();
+})();
+</script>
+
+
 
 
 </body>
