@@ -3,8 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Baptiste Massot, traileur professionnel : parcours, résultats, ambitions et partenariats.">
+<meta name="description" content="Baptiste Massot, traileur professionnel : parcours, résultats, ambitions, partenaires.">
 <title>Baptiste Massot</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="page-type" content="service">
+<meta name="site-kind" content="other">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -85,6 +88,10 @@ nav::-webkit-scrollbar { display: none; }
 nav ul { display: flex; gap: 24px; list-style: none; margin: 0; padding: 0; }
 nav a { font-family: var(--mono); font-size: .76rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); white-space: nowrap; padding: 6px 0; display: inline-block; }
 nav a:hover { color: var(--fg); }
+.lang { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 2px; flex: none; }
+.lang button { font: 600 .72rem/1 var(--mono); letter-spacing: .08em; padding: 8px 11px; border: 0; border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; transition: background .2s, color .2s; }
+.lang button:hover { color: var(--fg); }
+.lang button[aria-pressed="true"] { background: var(--fg); color: var(--on-accent); }
 .top .btn { padding: 12px 18px; font-size: .74rem; white-space: nowrap; }
 
 /* Hero : lever de soleil */
@@ -334,6 +341,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 </head>
 <body>
 
+
 <div class="bgimg" aria-hidden="true"></div>
   <header class="top bleed">
   <div class="wrap">
@@ -348,6 +356,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 72px; }
       </ul>
     </nav>
     <a class="btn" href="#partenaires">Devenir partenaire</a>
+    <div class="lang" role="group" aria-label="Langue"><button type="button" data-l="fr" aria-pressed="true">FR</button><button type="button" data-l="en" aria-pressed="false">EN</button></div>
   </div>
 </header>
 
@@ -474,7 +483,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 72px; }
           <p class="text" style="font-size:1.15rem">Une question, une proposition de partenariat, une interview : écris-moi.</p>
           <span class="mail" id="mail">massotbapt@gmail.com</span>
           <div class="actions">
-            <button class="btn" id="copy" type="button">Copier l'adresse</button>
+            <button class="btn" id="copy" type="button" data-i18n-skip>Copier l'adresse</button>
           </div>
           
         </div>
@@ -492,13 +501,124 @@ html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 (function () {
   var btn = document.getElementById('copy'), mail = document.getElementById('mail');
   btn.addEventListener('click', function () {
-    var done = function () { btn.textContent = 'Adresse copiée'; setTimeout(function () { btn.textContent = "Copier l'adresse"; }, 1800); };
+    var en = function () { return window.__lang && window.__lang() === 'en'; };
+    var done = function () { btn.textContent = en() ? 'Address copied' : 'Adresse copiée'; setTimeout(function () { btn.textContent = en() ? 'Copy address' : "Copier l'adresse"; }, 1800); };
     var fallback = function () {
       var r = document.createRange(); r.selectNodeContents(mail);
       var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
     };
     try { navigator.clipboard.writeText(mail.textContent).then(done, fallback); } catch (e) { fallback(); }
   });
+})();
+</script>
+<script>
+(function(){
+  var EN = {
+    "Parcours":"Journey","Résultats":"Results","Ambitions":"Ambitions","Médias":"Media","Partenaires":"Partners","Contact":"Contact",
+    "Devenir partenaire":"Become a partner",
+    "Âge":"Age","24 ans":"24 years old","Format":"Distance","Index UTMB":"UTMB Index","Index ITRA":"ITRA Index",
+    "Après 5 années au plus haut niveau international en Triathlon je décide d’ouvrir fin 2024 un nouveau chapitre sportif dédié au Trail. Dès la première saison les résultats en Trail sont prometteurs. Cette saison 2026 est seulement ma deuxième année sur le circuit. J’ai réduit le nombre de courses par rapport à 2025 pour arriver plus performant sur chaque épreuve :":
+    "After 5 years at the highest international level in Triathlon, I decided in late 2024 to open a new sporting chapter dedicated to Trail. From the very first season, my Trail results have been promising. This 2026 season is only my second year on the circuit. I've cut the number of races compared with 2025 so I can arrive in better shape for each event:",
+    "Victoire 25km de la Sainte Baume":"25km Sainte Baume win",
+    "Victoire SKYRACE des Gorges du Tarn":"SKYRACE des Gorges du Tarn win",
+    "Encore étudiant, je dessine mon avenir de manière à pouvoir concilier mon futur travail avec le trail. Fin 2027 je serai en mesure d’entraîner en Natation, Triathlon et Trail en plus de mon diplôme de MNS. À l’avenir je souhaiterai concilier ces sources de revenus à un contrat professionnel en Trail qui me permettrait de me dégager un maximum de temps pour l’entrainement et la récupération.":
+    "Still a student, I'm shaping my future so that I can combine my future job with trail running. By the end of 2027 I'll be able to coach Swimming, Triathlon and Trail, on top of my lifeguard diploma (MNS). In the future I'd like to combine these sources of income with a professional Trail contract that would free up as much time as possible for training and recovery.",
+    "Sur la ligne d'arrivée":"At the finish line",
+    "étape de coupe du monde Skyrunning":"Skyrunning World Cup stage",
+    "Trail de la Sainte Baume":"Sainte Baume Trail",
+    "Profil ITRA ↗":"ITRA profile ↗","Profil UTMB ↗":"UTMB profile ↗",
+    "Classement World Triathlon ↗":"World Triathlon ranking ↗",
+    "Vice-champion de France cadet de triathlon en 2018, puis troisième chez les Espoir en 2021. Multiples sélections en équipe de France jeune et élite, une Coupe du monde élite, plusieurs top 10 en Coupes d'Europe élite et des podiums en Coupe d'Afrique.":
+    "French youth (cadet) triathlon vice-champion in 2018, then third among U23 in 2021. Multiple selections for the French youth and elite teams, one elite World Cup, several top 10s in elite European Cups and podiums in the African Cup.",
+    "Championnats de France de trail court, Mont Ventoux":"French Short Trail Championships, Mont Ventoux",
+    "Championnats de France de trail court":"French Short Trail Championships",
+    "Championnats de France de course en montagne":"French Mountain Running Championships",
+    "Championnats de France de cross, Challans":"French Cross Country Championships, Challans",
+    "Kilomètre vertical":"Vertical kilometer",
+    "Montée du Piton des Neiges":"Piton des Neiges Climb",
+    "Mes ambitions":"My ambitions",
+    "Court terme":"Short term","Moyen terme":"Mid term","Long terme":"Long term",
+    "Pratiquer sur format":"Race the","Performer sur format":"Perform at the","Monter sur format":"Step up to the",
+    "Équipe de France de Trail":"French Trail Team",
+    "Championnat d’Europe de Trail":"European Trail Championships",
+    "Circuit Golden Trail Series":"Golden Trail Series circuit",
+    "Dernier podcast":"Latest podcast",
+    "Baptiste Massot : retrouver le haut niveau après un burn-out sportif":"Baptiste Massot: getting back to the top level after a sports burn-out",
+    "Écouter l'épisode":"Listen to the episode",
+    "Photos, coulisses et vie de course":"Photos, behind the scenes and race life",
+    "Mes sorties et mes entraînements":"My runs and training",
+    "Vidéos et podcast":"Videos and podcast",
+    "Ils me font confiance":"They trust me",
+    "Un partenariat avec un athlète, c'est une présence sur les départs, du contenu authentique et une histoire que vos clients peuvent suivre sur la durée.":
+    "A partnership with an athlete means a presence on the start line, authentic content and a story your customers can follow over time.",
+    "Me contacter":"Contact me",
+    "Visibilité":"Visibility","Contenus":"Content","Terrain":"Field testing",
+    "Votre marque sur ma tenue, mes départs et mes arrivées, dans les résultats et les photos de course.":"Your brand on my kit, at my starts and finishes, in the results and the race photos.",
+    "Photos, vidéos et récits de saison à utiliser sur vos propres canaux.":"Photos, videos and season stories to use on your own channels.",
+    "Tests de matériel en conditions réelles et retours précis après chaque sortie longue.":"Real-conditions gear tests and precise feedback after every long run.",
+    "Écrivons-nous":"Let's talk",
+    "Une question, une proposition de partenariat, une interview : écris-moi.":"A question, a partnership proposal, an interview: write to me.",
+    "Photos : Energyphotos,":"Photos: Energyphotos,","autres crédits":"other credits",
+    "Navigation principale":"Main navigation","Langue":"Language",
+    "Portrait de Baptiste Massot devant un mur de pierres sèches":"Portrait of Baptiste Massot in front of a dry-stone wall",
+    "Baptiste Massot sur le Trail de la Sainte Baume":"Baptiste Massot at the Sainte Baume Trail",
+    "Baptiste Massot à l'arrivée de la Skyrace des Gorges du Tarn":"Baptiste Massot at the finish of the Skyrace des Gorges du Tarn",
+    "Baptiste Massot sur l'OCC UTMB":"Baptiste Massot at the OCC UTMB",
+    "Baptiste Massot en tenue de l'équipe de France de triathlon, une bouteille d'eau à la main, de l'eau projetée sur la tête":"Baptiste Massot in the French triathlon team kit, a water bottle in hand, water splashed over his head",
+    "Team Trail, Alltricks et Hoka":"Team Trail, Alltricks and Hoka"
+  };
+  var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function norm(s){ return s.replace(/\s+/g,' ').replace(/[’]/g,"'").trim(); }
+  var D = {}; Object.keys(EN).forEach(function(k){ D[norm(k)] = EN[k]; });
+  var keys = Object.keys(D).sort(function(a,b){ return b.length - a.length; });
+  function ord(n){ n = +n; var m = n % 100; if (m >= 11 && m <= 13) return n + 'th'; return n + (['th','st','nd','rd'][n % 10 > 3 ? 0 : n % 10] || 'th'); }
+  function tr(s){
+    var t = norm(s);
+    if (!t) return s;
+    if (D[t] !== undefined) return D[t];
+    var dm = /^(\d{2})\/(\d{2})$/.exec(t);
+    if (dm) return MON[+dm[2] - 1] + ' ' + (+dm[1]);
+    keys.forEach(function(k){ if (t.indexOf(k) > -1 && k.length > 8) t = t.split(k).join(D[k]); });
+    return t
+      .replace(/(\d),(\d)/g, '$1.$2')
+      .replace(/(\d)[   ](?=\d{3}\b)/g, '$1,')
+      .replace(/\b(\d+)(?:er|e)\b/g, function(_, n){ return ord(n); })
+      .replace(/ par équipe/g, ' team');
+  }
+  var orig = new WeakMap(), lang = 'fr';
+  function nodes(){
+    var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, { acceptNode: function(n){
+      var p = n.parentNode; if (!p || /^(SCRIPT|STYLE)$/.test(p.nodeName) || p.closest('[data-i18n-skip]')) return NodeFilter.FILTER_REJECT;
+      return n.data.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT; } });
+    var a = [], n; while ((n = w.nextNode())) a.push(n); return a;
+  }
+  function apply(l){
+    lang = l;
+    nodes().forEach(function(n){
+      if (!orig.has(n)) orig.set(n, n.data);
+      var o = orig.get(n);
+      if (l === 'fr') { n.data = o; return; }
+      var lead = /^\s*/.exec(o)[0], trail = /\s*$/.exec(o)[0];
+      n.data = lead + tr(o) + trail;
+    });
+    [].slice.call(document.querySelectorAll('[alt],[aria-label]')).forEach(function(el){
+      ['alt','aria-label'].forEach(function(a){
+        if (!el.hasAttribute(a)) return;
+        var k = 'fr' + (a === 'alt' ? 'Alt' : 'Aria'); if (!el.dataset[k]) el.dataset[k] = el.getAttribute(a);
+        el.setAttribute(a, l === 'fr' ? el.dataset[k] : (D[norm(el.dataset[k])] || el.dataset[k]));
+      });
+    });
+    var cp = document.getElementById('copy'); if (cp) cp.textContent = l === 'en' ? 'Copy address' : "Copier l'adresse";
+    document.documentElement.lang = l;
+    [].slice.call(document.querySelectorAll('.lang button')).forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-l') === l ? 'true' : 'false'); });
+    try { localStorage.setItem('lang', l); } catch (e) {}
+  }
+  window.__lang = function(){ return lang; };
+  [].slice.call(document.querySelectorAll('.lang button')).forEach(function(b){
+    b.addEventListener('click', function(){ apply(b.getAttribute('data-l')); });
+  });
+  var saved = null; try { saved = localStorage.getItem('lang'); } catch (e) {}
+  if (saved === 'en') apply('en');
 })();
 </script>
 <script>
